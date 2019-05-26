@@ -131,7 +131,12 @@ function handleMessage(_connection: any, message: any, user: any) {
             });
 
             if (index >= 0) {
-                trafficSystems[index].connection.sendUTF(JSON.stringify('please open traffic for ambulance'));
+                trafficSystems[index].connection.sendUTF(JSON.stringify({
+                    'type': 'Ambulance_alert',
+                    'state': data.state,
+                    'lane': data.lane,
+                    'ambulance_id': data.id
+                }));
             }
             // if (data.gps) {
             //     let trafficResponse: any = {};
